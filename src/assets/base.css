@@ -1,86 +1,173 @@
-/* color palette from <https://github.com/vuejs/theme> */
-:root {
-  --vt-c-white: #ffffff;
-  --vt-c-white-soft: #f8f8f8;
-  --vt-c-white-mute: #f2f2f2;
-
-  --vt-c-black: #181818;
-  --vt-c-black-soft: #222222;
-  --vt-c-black-mute: #282828;
-
-  --vt-c-indigo: #2c3e50;
-
-  --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
-  --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
-  --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);
-  --vt-c-divider-dark-2: rgba(84, 84, 84, 0.48);
-
-  --vt-c-text-light-1: var(--vt-c-indigo);
-  --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
-  --vt-c-text-dark-1: var(--vt-c-white);
-  --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
+@font-face {
+  font-family: 'BIZ UDP Gothic';
+  src: url('/fonts/BIZUDPGothic-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
 }
 
-/* semantic color variables for this project */
-:root {
-  --color-background: var(--vt-c-white);
-  --color-background-soft: var(--vt-c-white-soft);
-  --color-background-mute: var(--vt-c-white-mute);
-
-  --color-border: var(--vt-c-divider-light-2);
-  --color-border-hover: var(--vt-c-divider-light-1);
-
-  --color-heading: var(--vt-c-text-light-1);
-  --color-text: var(--vt-c-text-light-1);
-
-  --section-gap: 160px;
+:root,
+.light {
+  --cl-base: #f7f7f8;
+  --cl-surface: #fff;
+  --cl-elevated: #f0f0f1;
+  --cl-hover: #e4e4e7;
+  --cl-border: rgb(0 0 0 / 10%);
+  --cl-border-hover: rgb(0 0 0 / 18%);
+  --cl-text: #18181b;
+  --cl-muted: #3f3f46;
+  --cl-dim: #5c5c66;
+  --cl-accent: #09090b;
+  --cl-accent-inverse: #fff;
+  --cl-success: #15803d;
+  --cl-warning: #a16207;
+  --cl-danger: #dc2626;
+  --cl-link: #1d4ed8;
+  --navbar-height: 56px;
+  --content-width: 1100px;
+  --radius: 4px;
+  --radius-lg: 8px;
+  color-scheme: light;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-background: var(--vt-c-black);
-    --color-background-soft: var(--vt-c-black-soft);
-    --color-background-mute: var(--vt-c-black-mute);
-
-    --color-border: var(--vt-c-divider-dark-2);
-    --color-border-hover: var(--vt-c-divider-dark-1);
-
-    --color-heading: var(--vt-c-text-dark-1);
-    --color-text: var(--vt-c-text-dark-2);
-  }
+.dark {
+  --cl-base: #0a0a0a;
+  --cl-surface: #111113;
+  --cl-elevated: #18181a;
+  --cl-hover: #1f1f22;
+  --cl-border: rgb(255 255 255 / 8%);
+  --cl-border-hover: rgb(255 255 255 / 16%);
+  --cl-text: #f4f4f5;
+  --cl-muted: #a1a1aa;
+  --cl-dim: #8c8c96;
+  --cl-accent: #fff;
+  --cl-accent-inverse: #09090b;
+  --cl-success: #4ade80;
+  --cl-warning: #facc15;
+  --cl-danger: #f87171;
+  --cl-link: #93c5fd;
+  color-scheme: dark;
 }
 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
-  margin: 0;
-  font-weight: normal;
 }
-
 body {
-  min-height: 100vh;
-  color: var(--color-text);
-  background: var(--color-background);
-  transition:
-    color 0.5s,
-    background-color 0.5s;
-  line-height: 1.6;
-  font-family:
-    Inter,
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    'Fira Sans',
-    'Droid Sans',
-    'Helvetica Neue',
+  margin: 0;
+  background: var(--cl-base);
+  color: var(--cl-text);
+  font:
+    14px / 1.55 'BIZ UDP Gothic',
+    system-ui,
     sans-serif;
-  font-size: 15px;
-  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+}
+button,
+input,
+select {
+  font: inherit;
+}
+button,
+select,
+label[for] {
+  cursor: pointer;
+}
+button {
+  color: inherit;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button,
+a,
+input,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+input,
+select {
+  min-width: 0;
+}
+button:disabled,
+fieldset:disabled button,
+fieldset:disabled label {
+  cursor: not-allowed;
+}
+button:disabled,
+input:disabled,
+select:disabled {
+  opacity: 0.48;
+}
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+fieldset:disabled .drop-zone {
+  opacity: 0.5;
+}
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+h1 {
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.045em;
+  line-height: 1.35;
+}
+h2 {
+  font-size: 18px;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+}
+h3 {
+  font-size: 14px;
+  font-weight: 600;
+}
+svg {
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+:focus-visible {
+  outline: 2px solid var(--cl-accent);
+  outline-offset: 3px;
+}
+::selection {
+  background: var(--cl-accent);
+  color: var(--cl-accent-inverse);
+}
+[hidden] {
+  display: none !important;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

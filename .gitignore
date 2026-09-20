@@ -42,3 +42,8 @@ test-results/
 playwright-report/
 
 !.vscode/settings.json
+
+.env
+.env.*
+!.env.example
+.vercel/

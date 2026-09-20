@@ -8,7 +8,7 @@
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "test:unit": "vitest",
-    "test:e2e": "playwright test",
+    "test:e2e": "bun run build && playwright test",
     "build-only": "vite build",
     "type-check": "vue-tsc --build",
     "lint": "run-s \"lint:*\"",
@@ -17,7 +17,9 @@
     "format": "oxfmt src/"
   },
   "dependencies": {
+    "@phosphor-icons/vue": "^2.2.1",
     "pinia": "^4.0.3",
+    "skin3d": "0.2.0",
     "vue": "rc",
     "vue-router": "^5.3.1"
   },
@@ -26,6 +28,7 @@
     "@tsconfig/node24": "^24.0.5",
     "@types/jsdom": "^30.0.0",
     "@types/node": "^24.13.4",
+    "@types/three": "^0.156.0",
     "@vitejs/plugin-vue": "^6.0.8",
     "@vitest/eslint-plugin": "^1.6.27",
     "@vue/eslint-config-typescript": "^14.9.0",

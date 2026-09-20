@@ -1,85 +1,74 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import { ref } from 'vue'
+import { RouterLink, RouterView, useRouter } from 'vue-router'
+import { PhArrowUpRight, PhSignOut, PhGithubLogo } from '@phosphor-icons/vue'
+import CubicLogo from '@/components/CubicLogo.vue'
+import ThemeSwitcher from '@/components/ThemeSwitcher.vue'
+import { useAuthStore } from '@/stores/auth'
+import { useNotificationsStore } from '@/stores/notifications'
+const auth = useAuthStore(),
+  router = useRouter()
+const notifications = useNotificationsStore()
+const signingOut = ref(false)
+async function logout() {
+  signingOut.value = true
+  try {
+    await auth.logout()
+    await router.push('/login')
+  } finally {
+    signingOut.value = false
+  }
+}
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+  <Teleport to="body"
+    ><Transition name="corner-notice"
+      ><p v-if="notifications.connectionMessage" class="connection-notice" role="alert">
+        {{ notifications.connectionMessage }}
+      </p></Transition
+    ></Teleport
+  >
+  <a class="skip-link" href="#main-content">Ir al contenido</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <RouterLink to="/" class="brand" aria-label="CubicLauncher · Cuentas"
+        ><CubicLogo /><span>CubicLauncher</span><span class="brand-divider" /><span
+          class="brand-section"
+          >Cuentas</span
+        ></RouterLink
+      >
+      <div class="header-actions">
+        <ThemeSwitcher />
+        <a class="site-link" href="https://cubiclauncher.org"
+          >Sitio web <PhArrowUpRight :size="13"
+        /></a>
+        <button
+          v-if="auth.session"
+          class="button button-small"
+          :disabled="signingOut"
+          @click="logout"
+        >
+          <PhSignOut :size="15" />{{ signingOut ? 'Saliendo…' : 'Salir' }}
+        </button>
+      </div>
     </div>
   </header>
-
-  <RouterView />
+  <main id="main-content" class="main-content" tabindex="-1"><RouterView /></main>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <a class="brand footer-brand" href="https://cubiclauncher.org"
+        ><CubicLogo /><span>CubicLauncher</span></a
+      >
+      <nav aria-label="Enlaces del sitio">
+        <a href="https://dev.cubiclauncher.org/docs">Documentación</a>
+        <a href="https://dev.cubiclauncher.org/docs/es-ES/Legal/privacy">Privacidad</a>
+        <a href="https://dev.cubiclauncher.org/docs/es-ES/Legal/terms">Términos</a>
+        <a href="https://github.com/CubicLauncherDevs" aria-label="CubicLauncher en GitHub"
+          ><PhGithubLogo :size="17"
+        /></a>
+      </nav>
+      <span class="footer-copyright">© {{ new Date().getFullYear() }} CubicLauncher</span>
+    </div>
+  </footer>
 </template>
-
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-}
-</style>
