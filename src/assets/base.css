@@ -23,6 +23,7 @@
   --cl-warning: #a16207;
   --cl-danger: #dc2626;
   --cl-link: #1d4ed8;
+  --cl-logo: #09090b;
   --navbar-height: 56px;
   --content-width: 1100px;
   --radius: 4px;
@@ -46,6 +47,7 @@
   --cl-warning: #facc15;
   --cl-danger: #f87171;
   --cl-link: #93c5fd;
+  --cl-logo: #f4f4f5;
   color-scheme: dark;
 }
 

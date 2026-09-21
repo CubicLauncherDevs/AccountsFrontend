@@ -17,14 +17,9 @@ const clipId = useId()
       </clipPath>
     </defs>
     <g :clip-path="`url(#${clipId})`">
-      <g transform="translate(85,42) scale(.66601562,.78320312)">
-        <path fill="#4C6FA5" d="M0 0h256v256H0z" />
-        <path fill="#F2F1EE" d="M256 0h256v256H256z" />
-        <path fill="#B5645C" d="M0 256h512v256H0z" />
-        <path fill="#F2F1EE" d="m128 58 17 43 46 2-37 29 14 46-40-27-40 27 14-46-37-29 46-2z" />
-      </g>
+      <rect width="512" height="512" fill="var(--cl-logo)" />
     </g>
-    <g stroke="#3a2e2c" stroke-width="3" stroke-linejoin="round">
+    <g stroke="var(--cl-logo)" stroke-width="3" stroke-linejoin="round">
       <path
         d="m86.694 219.563-.628 126.587 166.164 96.432h12.25l164.908-99.887-59.681-32.668-.314-118.734-101.772 57.168-.942 115.907 56.54-34.866 24.815 12.25-84.496 56.854-137.267-73.816-.314-81.669z"
       />
